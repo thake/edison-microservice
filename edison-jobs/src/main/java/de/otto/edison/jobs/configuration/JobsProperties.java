@@ -40,6 +40,9 @@ public class JobsProperties {
     @Valid
     private Mongo mongo = new Mongo();
 
+    @Valid
+    private S3Firehose s3Firehose = new S3Firehose();
+
     public boolean isExternalTrigger() {
         return externalTrigger;
     }
@@ -78,6 +81,14 @@ public class JobsProperties {
 
     public void setMongo(Mongo mongo) {
         this.mongo = mongo;
+    }
+
+    public S3Firehose getS3Firehose() {
+        return s3Firehose;
+    }
+
+    public void setS3Firehose(S3Firehose s3Firehose) {
+        this.s3Firehose = s3Firehose;
     }
 
     public static class Cleanup {
@@ -171,5 +182,39 @@ public class JobsProperties {
             this.enabled = enabled;
         }
 
+    }
+
+    public static class S3Firehose {
+        /**
+         * Enable / disable s3firehose job repository.
+         */
+        private boolean enabled = false;
+
+        private String bucketName = null;
+        private String deliveryStream = null;
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+
+        public String getDeliveryStream() {
+            return deliveryStream;
+        }
+
+        public void setDeliveryStream(String deliveryStream) {
+            this.deliveryStream = deliveryStream;
+        }
+
+        public String getBucketName() {
+            return bucketName;
+        }
+
+        public void setBucketName(String bucketName) {
+            this.bucketName = bucketName;
+        }
     }
 }

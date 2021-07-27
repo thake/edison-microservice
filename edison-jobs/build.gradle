@@ -3,6 +3,7 @@ apply plugin: 'java-library'
 dependencies {
     implementation project(":edison-core")
 
+    implementation libraries.aws_sdk_s3
     implementation libraries.mongodb_driver_core
     implementation libraries.mongodb_driver_sync
     implementation project(":edison-mongo")
