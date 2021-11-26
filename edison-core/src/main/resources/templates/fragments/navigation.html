@@ -2,15 +2,47 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <body>
 
-    <nav class="navbar navbar-default navbar-fixed-top" th:fragment="navigation">
-        <div class="container">
-            <div class="navbar-header" th:replace="fragments/navbar/header :: header" />
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav" th:replace="fragments/navbar/main :: main" />
-                <ul class="nav navbar-nav navbar-right" th:replace="fragments/navbar/right :: right" />
-            </div><!--/.nav-collapse -->
+<nav class="navbar navbar-light bg-light navbar-expand-lg" th:fragment="navigation">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" th:href="@{|${edisonManagementBasePath}/status|}" th:text="${@applicationInfo.title}">Edison
+            µService</a>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav" th:with="url=${#httpServletRequest.getRequestURI()}" th:fragment="main">
+                <li class="nav-item" th:each="item : ${@mainNavBar.items}">
+                    <a class="nav-link" th:href="@{${item.link}}" th:text="${item.title}"
+                       th:classappend="${url.endsWith(item.getLink()) ? 'active' : ''}"/>
+                </li>
+            <!--</ul>
+            <ul class="navbar-nav navbar-right  d-flex" th:with="url=${#httpServletRequest.getRequestURI()}"
+                th:fragment="right">-->
+                <li role="presentation" class="nav-item dropdown d-flex">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                       aria-expanded="false" id="navbarDropdown">
+                        Admin
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li th:each="item : ${@rightNavBar.items}">
+                            <a class="dropdown-item" th:href="@{${item.link}}" th:text="${item.title}"></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" th:href="@{|${webEndpointBasePath}/health|}">health</a></li>
+                        <li><a class="dropdown-item" th:href="@{|${webEndpointBasePath}/trace|}">trace</a></li>
+                        <li><a class="dropdown-item" th:href="@{|${webEndpointBasePath}/info|}">info</a></li>
+                        <li><a class="dropdown-item" th:href="@{|${webEndpointBasePath}/mappings|}">mappings</a></li>
+                        <li><a class="dropdown-item" th:href="@{|${webEndpointBasePath}/conditions|}">conditions</a></li>
+                        <li><a class="dropdown-item" th:href="@{|${webEndpointBasePath}/env|}">env</a></li>
+                        <li><a class="dropdown-item" th:href="@{|${webEndpointBasePath}/beans|}">beans</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
 </body>
 </html>

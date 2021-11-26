@@ -2,26 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <body>
 
-<ul class="nav navbar-nav navbar-right" th:with="url=${#httpServletRequest.getRequestURI()}" th:fragment="right">
-    <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            Admin <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li th:each="item : ${@rightNavBar.items}">
-                <a th:href="@{${item.link}}" th:text="${item.title}" />
-            </li>
-            <li role="separator" class="divider"></li>
-            <li><a th:href="@{|${webEndpointBasePath}/health|}">health</a></li>
-            <li><a th:href="@{|${webEndpointBasePath}/trace|}">trace</a></li>
-            <li><a th:href="@{|${webEndpointBasePath}/info|}">info</a></li>
-            <li><a th:href="@{|${webEndpointBasePath}/mappings|}">mappings</a></li>
-            <li><a th:href="@{|${webEndpointBasePath}/conditions|}">conditions</a></li>
-            <li><a th:href="@{|${webEndpointBasePath}/env|}">env</a></li>
-            <li><a th:href="@{|${webEndpointBasePath}/beans|}">beans</a></li>
-        </ul>
-    </li>
-</ul>
+
 
 </body>
 </html>
